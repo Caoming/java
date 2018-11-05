@@ -1,0 +1,14 @@
+*.class
+.settings
+target
+.project
+.classpath
+*.log
+.metadata/
+.idea/*
+.idea
+*.idea/*
+*.iml
+*/logs/*
+*/coverage-report/*
+*.gitignore.swp
