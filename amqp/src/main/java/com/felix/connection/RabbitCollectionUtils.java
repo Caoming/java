@@ -13,6 +13,9 @@ public class RabbitCollectionUtils {
 
     public static final String FELIX_DURATION_TEST = "felix_duration_test";
     public static final String FELIX_NO_DURATION_TEST = "felix_no_duration_test";
+    public static final String FELIX_SIMPLE_DEMO = "felix_simple_demo";
+    public static final String FELIX_QUEUE_DEMO = "felix_queue_demo";
+    public static final String FELIX_PUBLISH_SUBSCRIBE_DEMO = "felix_publish_subscribe_demo";
 
     public static Connection getCollection() throws IOException, TimeoutException {
         ConnectionFactory connectionFactory = new ConnectionFactory();

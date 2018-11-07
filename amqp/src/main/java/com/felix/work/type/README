@@ -1,0 +1,7 @@
+* RabbitMQ支持的模式
+** simple demo
+** work queue （消费者竞争模式Z）
+** 发布订阅
+** routing
+** topic
+** RPC

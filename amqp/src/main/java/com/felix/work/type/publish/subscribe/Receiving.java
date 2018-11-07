@@ -1,4 +1,4 @@
-package com.felix.qos.ack;
+package com.felix.work.type.publish.subscribe;
 
 import com.felix.connection.RabbitCollectionUtils;
 import com.rabbitmq.client.*;
@@ -16,21 +16,23 @@ public class Receiving {
         Connection collection = RabbitCollectionUtils.getCollection();
         final Channel channel = collection.createChannel();
 
-        channel.basicQos(1000);
+        String queue = channel.queueDeclare().getQueue();
+        channel.queueBind(queue,RabbitCollectionUtils.FELIX_PUBLISH_SUBSCRIBE_DEMO,"");
+
+        channel.basicQos(1);
         Consumer consumer = new DefaultConsumer(channel){
             public void handleDelivery(String consumerTag,
                                        Envelope envelope,
                                        AMQP.BasicProperties properties,
                                        byte[] body) throws IOException {
                 long deliveryTag = envelope.getDeliveryTag();
-                System.out.println("接收到消息为：" + new String(body) + "consumerTag为：" + consumerTag);
+                System.out.println("接收到消息为：" + new String(body) + "deliveryTag为：" + deliveryTag);
 
-                channel.basicAck(deliveryTag,true);
             }
         };
 
 
-        channel.basicConsume(RabbitCollectionUtils.FELIX_DURATION_TEST,true, consumer);
+        channel.basicConsume(queue,true, consumer);
     }
 
 }
