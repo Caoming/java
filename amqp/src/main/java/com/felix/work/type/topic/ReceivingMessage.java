@@ -1,4 +1,4 @@
-package com.felix.work.type.routing;
+package com.felix.work.type.topic;
 
 import com.felix.connection.RabbitCollectionUtils;
 import com.rabbitmq.client.*;
@@ -7,17 +7,18 @@ import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
 /**
- *
+ * 持久化数据消费
  * @author felix
  */
-public class ReceivingInfoMessage {
+public class ReceivingMessage {
 
     public static void main(String[] args) throws IOException, TimeoutException {
         Connection collection = RabbitCollectionUtils.getCollection();
         final Channel channel = collection.createChannel();
 
+        channel.exchangeDeclare(RabbitCollectionUtils.FELIX_TOPIC_DEMO,"topic",true );
         String queue = channel.queueDeclare().getQueue();
-        channel.queueBind(queue,RabbitCollectionUtils.FELIX_ROUTING_DEMO,"info");
+        channel.queueBind(queue,RabbitCollectionUtils.FELIX_TOPIC_DEMO,"felix.#");
 
         channel.basicQos(1);
         Consumer consumer = new DefaultConsumer(channel){

@@ -24,7 +24,7 @@ public class Receiving1 {
                 long deliveryTag = envelope.getDeliveryTag();
                 System.out.println("接收到消息为：" + new String(body) + "consumerTag为：" + consumerTag);
 
-                channel.basicAck(deliveryTag,false);
+//                channel.basicAck(deliveryTag,false);
             }
         };
 

@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
 /**
- * 持久化数据处理
+ * routing 模式适合，多消费者消费相同信息
  * @author felix
  */
 public class Send {

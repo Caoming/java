@@ -1,4 +1,4 @@
-package com.felix.work.type.demo;
+package com.felix.work.type.topic;
 
 import com.felix.connection.RabbitCollectionUtils;
 import com.rabbitmq.client.Channel;
@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
 /**
- * 队列模式：主要发送到队列里面
+ * topic模式，适合做一些多消费端且消费端接收数据不一样的场景
  * @author felix
  */
 public class Send {
@@ -19,7 +19,7 @@ public class Send {
         Connection collection = RabbitCollectionUtils.getCollection();
         Channel channel = collection.createChannel();
 
-        channel.queueDeclare(RabbitCollectionUtils.FELIX_SIMPLE_DEMO,true,false,false,null);
+        channel.exchangeDeclare(RabbitCollectionUtils.FELIX_TOPIC_DEMO,"topic",true);
 
         channel.confirmSelect();
         channel.addConfirmListener(new ConfirmListener() {
@@ -33,8 +33,9 @@ public class Send {
         });
 
         for(int i = 0; i < 100; i++) {
-            channel.basicPublish("",RabbitCollectionUtils.FELIX_SIMPLE_DEMO, MessageProperties.PERSISTENT_BASIC,("hello world"+i).getBytes());
-            System.out.println("消息发送成功！");
+            channel.basicPublish(RabbitCollectionUtils.FELIX_TOPIC_DEMO,"caoming.felix.info", MessageProperties.PERSISTENT_TEXT_PLAIN,("info message"+i).getBytes());
+            channel.basicPublish(RabbitCollectionUtils.FELIX_TOPIC_DEMO,"felix.warning", MessageProperties.PERSISTENT_TEXT_PLAIN,("warning message"+i).getBytes());
+            channel.basicPublish(RabbitCollectionUtils.FELIX_TOPIC_DEMO,"felix.error.warning", MessageProperties.PERSISTENT_TEXT_PLAIN,("error FELIX message"+i).getBytes());
         }
 
         channel.close();
