@@ -16,17 +16,17 @@ public class RabbitCollectionUtils {
     public static final String FELIX_SIMPLE_DEMO = "felix_simple_demo";
     public static final String FELIX_QUEUE_DEMO = "felix_queue_demo";
     public static final String FELIX_PUBLISH_SUBSCRIBE_DEMO = "felix_publish_subscribe_demo";
-    public static final String FELIX_ROUTING_DEMO = "felix_routing_demo";
+    public static final String  FELIX_ROUTING_DEMO = "felix_routing_demo";
     public static final String FELIX_TOPIC_DEMO = "felix_topic_demo";
 
     public static Connection getCollection()  {
         ConnectionFactory connectionFactory = new ConnectionFactory();
         connectionFactory.setConnectionTimeout(10000);
-        connectionFactory.setPassword("guest");
-        connectionFactory.setUsername("guest");
+        connectionFactory.setPassword("wintel");
+        connectionFactory.setUsername("wintel");
         connectionFactory.setVirtualHost("/");
         try {
-            return connectionFactory.newConnection(Address.parseAddresses("127.0.0.1:5672"));
+            return connectionFactory.newConnection(Address.parseAddresses("106.75.120.153:5672"));
         } catch (IOException e) {
             e.printStackTrace();
         } catch (TimeoutException e) {
