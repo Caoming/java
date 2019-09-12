@@ -116,6 +116,8 @@ public class Practice {
         logs.add(new OrderLog(2011,20.00d,"SH","caoming5"));
         logs.add(new OrderLog(2013,21200.00d,"GZ","caoming7"));
 
+        logs.stream().filter(l -> Arrays.stream(new Integer[]{2011,2012}).anyMatch(i ->l.getYear() == i)).collect(Collectors.toList());
+
         // 找出2011年发生的所有交易，并按照交易额排序
         logs.stream().filter(s -> 2011 == s.getYear()).
                 map(s -> s.getAccount()).sorted(Double::compare)

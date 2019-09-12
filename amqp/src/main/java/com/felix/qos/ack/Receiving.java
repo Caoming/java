@@ -16,7 +16,7 @@ public class Receiving {
         Connection collection = RabbitCollectionUtils.getCollection();
         final Channel channel = collection.createChannel();
 
-        channel.basicQos(1000);
+        channel.basicQos(100);
         Consumer consumer = new DefaultConsumer(channel){
             public void handleDelivery(String consumerTag,
                                        Envelope envelope,
@@ -26,11 +26,21 @@ public class Receiving {
                 System.out.println("接收到消息为：" + new String(body) + "consumerTag为：" + consumerTag);
 
                 channel.basicAck(deliveryTag,true);
+
+//                try{
+//                    for(int i = 0; i < 10;i++) {
+//                        Thread.sleep(1000l);
+//                        System.out.println("第"+i +"次");
+//                    }
+//                }catch (Exception e){
+//                    e.printStackTrace();
+//                }
             }
         };
 
+        channel.queueBind("felix.queue.key","felix.exchange.name","felix.routing.key");
 
-        channel.basicConsume(RabbitCollectionUtils.FELIX_DURATION_TEST,true, consumer);
+        channel.basicConsume("felix.queue.key",false, consumer);
     }
 
 }
