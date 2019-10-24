@@ -98,13 +98,13 @@ public class ArrayList<E> implements Serializable{
             throw new RuntimeException("队列已超过指定长度");
         }
 
-        currSize = methodSize;
 
         // 数组需要扩大容量
         if(currSize > methodSize){
             Arrays.copyOf(elementDatas,currSize);
         }
 
+        currSize = methodSize;
         elementDatas[currSize-1] = e;
     }
 

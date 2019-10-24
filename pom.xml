@@ -17,6 +17,8 @@
         <module>java8</module>
         <module>testng</module>
         <module>kafka</module>
+        <module>jdk</module>
+        <module>felix-zipkin</module>
     </modules>
 
 </project>
