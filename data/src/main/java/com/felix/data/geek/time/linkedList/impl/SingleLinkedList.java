@@ -2,6 +2,11 @@ package com.felix.data.geek.time.linkedList.impl;
 
 import com.felix.data.geek.time.linkedList.AbstractLinkedList;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
  * 单向链表，实现方法增删查
  *
@@ -95,4 +100,108 @@ public class SingleLinkedList<E> extends AbstractLinkedList<E> {
         return newNode.getItem();
 
     }
+
+    /**
+     * 单向链表反转
+     * @param linkedList
+     * @return
+     */
+    public SingleLinkedList<E> reverse(SingleLinkedList<E> linkedList){
+        if(linkedList == null || linkedList.modCount == 0 || linkedList.modCount == 1){
+            return linkedList;
+        }
+
+        Node<E> node = linkedList.first;
+
+        // 存放链表的数据，双向链表实现起来更好
+        Object[] arrays = new Object[linkedList.modCount];
+
+        for(int i = 0; node!= null;i++){
+            arrays[i] = node.getItem();
+            node = node.getNext();
+        }
+
+        SingleLinkedList<E> newLinkedList = new SingleLinkedList<>();
+        for(int i = 0 ; i < linkedList.modCount; i++){
+            if(i == 0) {
+                newLinkedList.last = new Node<E>((E) arrays[i], null, null);
+                node = newLinkedList.last;
+            }else if(i != 0){
+                node = new Node<E>((E) arrays[i], null, node);
+                if(i == linkedList.modCount -1){
+                    newLinkedList.first = node;
+                }
+            }
+        }
+
+        return newLinkedList;
+
+    }
+
+
+    /**
+     * 链表中是否有环
+     * @param linkedList
+     * @return
+     */
+    public boolean isLoopLinkedList(SingleLinkedList<E> linkedList){
+        if(linkedList == null || linkedList.modCount ==  0 || linkedList.modCount == 1){
+            return false;
+        }
+
+        Map<E,Integer> map = new HashMap<>();
+        Node<E> node = linkedList.first;
+
+        while (node != null){
+            if(map.containsKey(node.getItem())){
+                return true;
+            }
+            map.put(node.getItem(),1);
+            node = node.getNext();
+        }
+        return false;
+
+    }
+
+    /**
+     * 获取链表中间节点
+     * @param linkedList
+     * @return
+     */
+    public List<Node<E>> getMiddle(SingleLinkedList<E> linkedList){
+        if(linkedList == null || linkedList.modCount < 3){
+            throw new RuntimeException("没有任何意义");
+        }
+
+        List<Node<E>> list = new ArrayList<>();
+        Node<E> oneNode = linkedList.first;
+        Node<E> twoNode = linkedList.first.getNext();
+        while (twoNode != null){
+            if(twoNode.getNext()== null){
+                list.add(oneNode);
+                list.add(oneNode.getNext());
+                return list;
+            }else if(twoNode.getNext().getNext() == null){
+                list.add(oneNode.getNext());
+                return list;
+            }
+            oneNode = oneNode.getNext();
+            twoNode = twoNode.getNext().getNext();
+        }
+
+        return list;
+    }
+
+    @Override
+    public String toString(){
+        String s = "";
+        Node<E> node = this.first;
+        while (node != null){
+            s += node.getItem().toString();
+            node = node.getNext();
+        }
+        return s;
+    }
+
+
 }
