@@ -9,11 +9,11 @@ import java.lang.instrument.ClassFileTransformer;
 import java.lang.instrument.IllegalClassFormatException;
 import java.security.ProtectionDomain;
 
-public class TestClassFileTransformer implements ClassFileTransformer {
+public class BcelClassFileTransformer implements ClassFileTransformer {
 
     private String agentArgs;
 
-    public TestClassFileTransformer(String agentArgs) {
+    public BcelClassFileTransformer(String agentArgs) {
         this.agentArgs = agentArgs;
     }
 
