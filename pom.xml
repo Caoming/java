@@ -21,6 +21,9 @@
         <module>felix-zipkin</module>
         <module>javaagent</module>
         <module>javaagent-test</module>
+        <module>zipkin-server</module>
+        <module>kotlin-test</module>
+        <module>zookeeper</module>
     </modules>
 
     <build>

@@ -22,7 +22,7 @@ public class Consumer {
 
     private static Gson gson = new GsonBuilder().create();
 
-//    @KafkaListener(topics = {"huayuan123"})
+    @KafkaListener(topics = {"custom-rule-data"})
     public void listen(ConsumerRecord record){
         Optional<?> kafkaMessage = Optional.ofNullable(record.value());
 

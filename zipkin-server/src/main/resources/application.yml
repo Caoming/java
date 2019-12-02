@@ -1,0 +1,22 @@
+#配置kafka
+spring:
+  sleuth:
+    enabled: false
+    sampler:
+      percentage: 1.0
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers: 10.10.51.189:9200,10.10.55.38:9200,10.10.58.34:9200
+          zkNodes: 10.10.51.189:2181,10.10.55.38:2181,10.10.58.34:2181
+  #ES配置
+zipkin:
+  storage:
+    type: elasticsearch
+    elasticsearch:
+      host: http://10.19.87.95:9200
+      cluster: es_cluster
+      index: zipkin
+      index-shards: 1
+      index-replicas: 1

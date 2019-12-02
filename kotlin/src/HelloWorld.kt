@@ -13,6 +13,9 @@ fun main(args: Array<String>) {
     for (i in list.indices){
         println(list[i])
     }
+
+    var listStr = mutableListOf("12","23","34")
+    testA(*listStr.toTypedArray())
 }
 
 fun testLet():Unit{
@@ -31,4 +34,12 @@ fun testApply():List<String> {
         add("123")
         add("123")
     }
+}
+
+fun testA(vararg indexs:String){
+    testB(*indexs.asList().toTypedArray())
+}
+
+fun testB(vararg indexs:String){
+    println(indexs.toString())
 }

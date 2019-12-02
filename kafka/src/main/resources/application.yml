@@ -4,7 +4,7 @@ server:
   port: 8080
 spring:
   kafka:
-    bootstrap-servers: 10.10.23.15:9092
+    bootstrap-servers: 127.0.0.1:9092
     producer:
       batch-size: 16
       retries: 0

@@ -4,6 +4,7 @@ import com.felix.data.geek.time.linkedList.impl.DoubleLinkedList;
 import com.felix.data.geek.time.linkedList.impl.SingleLinkedList;
 import org.junit.Test;
 
+import java.util.Base64;
 import java.util.List;
 
 public class LinkedListTest {
@@ -76,5 +77,25 @@ public class LinkedListTest {
             System.out.println(node.getItem());
         }
 
+    }
+
+    @Test
+    public void test(){
+        byte[] encode = Base64.getEncoder().encode("ewewe12".getBytes());
+        byte[] key = "sss".getBytes();
+        byte[] result = new byte[encode.length];
+        for (int i = 0;i < encode.length ; i++){
+            result[i] = (byte) (encode[i] ^ key[i % key.length]);
+        }
+        String s = new String(result);
+        System.out.println(s);
+
+        byte[] sByte = s.getBytes();
+        byte[] sResult = new byte[sByte.length];
+        for (int i = 0;i < sByte.length ; i++){
+            sResult[i] = (byte) (sByte[i] ^ key[i % key.length]);
+        }
+
+        System.out.println(new String(Base64.getDecoder().decode(new String(sResult))));
     }
 }
