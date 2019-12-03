@@ -33,6 +33,31 @@ public class PalindromicTest {
         return true;
     }
 
+    /**
+     *  字符串中最大的回文数，n^3
+     * @param str
+     * @return
+     */
+    public static String getMaxPalindromic(String str){
+        if(StringUtils.isBlank(str)){
+            return str;
+        }
+
+        String maxStr = "";
+        String[] strs = str.split("");
+        for(int i = 0;i < strs.length; i++){
+            for(int j = i; j < strs.length;j++){
+                String palindromic = str.substring(i, j + 1);
+                if(isPalindromic(palindromic)){
+                    maxStr = maxStr.length() < palindromic.length() ? palindromic : maxStr;
+                }
+            }
+        }
+
+        return maxStr;
+
+    }
+
     public static void main(String[] args) {
         System.out.println(isPalindromic(""));
         System.out.println(isPalindromic("a"));
@@ -41,5 +66,11 @@ public class PalindromicTest {
         System.out.println(isPalindromic("abba"));
         System.out.println(isPalindromic("ababa"));
         System.out.println(isPalindromic("ababaa"));
+        System.out.println(getMaxPalindromic("absbdsasduewsdasd"));
+        System.out.println(getMaxPalindromic("bb23ksdlakd"));
+        System.out.println(getMaxPalindromic("civilwartestingwhetherthatnaptionoranynartionsoconceivedandsodedicatedcanlongendureWeareqmetonagreatbattlefiemldoftzhatwarWehavecometodedicpateaportionofthatfieldasafinalrestingplaceforthosewhoheregavetheirlivesthatthatnationmightliveItisaltogetherfangandproperthatweshoulddothisButinalargersensewecannotdedicatewecannotconsecratewecannothallowthisgroundThebravelmenlivinganddeadwhostruggledherehaveconsecrateditfaraboveourpoorponwertoaddordetractTgheworldadswfilllittlenotlenorlongrememberwhatwesayherebutitcanneverforgetwhattheydidhereItisforusthelivingrathertobededicatedheretotheulnfinishedworkwhichtheywhofoughtherehavethusfarsonoblyadvancedItisratherforustobeherededicatedtothegreattdafskremainingbeforeusthatfromthesehonoreddeadwetakeincreaseddevotiontothatcauseforwhichtheygavethelastpfullmeasureofdevotionthatweherehighlyresolvethatthesedeadshallnothavediedinvainthatthisnationunsderGodshallhaveanewbirthoffreedomandthatgovernmentofthepeoplebythepeopleforthepeopleshallnotperishfromtheearth"));
     }
+
+
+
 }
