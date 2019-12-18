@@ -24,6 +24,7 @@
         <module>zipkin-server</module>
         <module>kotlin-test</module>
         <module>zookeeper</module>
+        <module>spring</module>
     </modules>
 
     <build>

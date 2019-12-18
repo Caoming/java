@@ -3,10 +3,10 @@ package com.felix.thread.pool;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class ExecutorsExample2 {
+public class ExecutorsExample3 {
 
     public static void main(String[] args) {
-        ExecutorService service = Executors.newFixedThreadPool(3);
+        ExecutorService service = Executors.newSingleThreadExecutor();
 
         for(int i = 0; i < 100;i++){
             final int index = i;

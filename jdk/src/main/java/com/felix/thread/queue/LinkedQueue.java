@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.Queue;
 
-public class LinkeQueue<T> implements Queue<T> {
+public class LinkedQueue<T> implements Queue<T> {
 
     // 当前的大小
     private int size;
@@ -16,7 +16,7 @@ public class LinkeQueue<T> implements Queue<T> {
     // 链表大小
     private int capacity;
 
-    public LinkeQueue(int capacity) {
+    public LinkedQueue(int capacity) {
         this.capacity = capacity;
     }
 

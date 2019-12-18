@@ -1,8 +1,20 @@
 package com.felix.thread.pool;
 
-public class ExcutorsExample1 {
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+public class ExecutorsExample1 {
 
     public static void main(String[] args) {
-        Excutors
+        ExecutorService service = Executors.newCachedThreadPool();
+
+        for(int i = 0; i < 10;i++){
+            final int index = i;
+            service.execute(()->{
+                System.out.println("123123s..."+ index);
+            });
+        }
+
+        service.shutdown();
     }
 }
