@@ -40,21 +40,21 @@
         </dependency>
     </dependencies>
 
-    <repositories>
-        <repository>
-            <id>puhuifinance</id>
-            <name>Maven of Puhuifinance.com</name>
-            <url>http://inside.puhuifinance.com/nexus/content/groups/public/</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-            <layout>default</layout>
-        </repository>
+    <!--<repositories>-->
+        <!--<repository>-->
+            <!--<id>puhuifinance</id>-->
+            <!--<name>Maven of Puhuifinance.com</name>-->
+            <!--<url>http://inside.puhuifinance.com/nexus/content/groups/public/</url>-->
+            <!--<releases>-->
+                <!--<enabled>true</enabled>-->
+            <!--</releases>-->
+            <!--<snapshots>-->
+                <!--<enabled>true</enabled>-->
+            <!--</snapshots>-->
+            <!--<layout>default</layout>-->
+        <!--</repository>-->
 
-    </repositories>
+    <!--</repositories>-->
 
     <build>
         <plugins>

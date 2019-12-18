@@ -23,6 +23,12 @@ public class ArrayQueue {
      * @return
      */
     public  boolean enQueue(Integer t){
+        if(size == arr.length){
+            System.out.println("队列已满");
+            return false;
+        }
+
+
         if(startIndex == 0 && startIndex == endIndex){
             arr[0] = t;
             endIndex++;
