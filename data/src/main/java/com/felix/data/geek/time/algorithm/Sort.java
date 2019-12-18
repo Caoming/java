@@ -62,7 +62,7 @@ public class Sort {
 
         int length = arr.length;
 
-        int temp = 0;
+        int temp;
         for(int i = 0; i < length; i++){
 
             for(int j = i; j < length;j++){
@@ -89,5 +89,68 @@ public class Sort {
         selectionSort(arr2);
         System.out.println(ArrayUtils.toString(arr2));
 
+        System.out.println(convert("PAYPALISHIRING",3));
+        System.out.println(convert("ABC",2));
+        System.out.println(convert("LEETCODEISHIRING",3).equals("LCIRETOESIIGEDHN"));
+        System.out.println(convert("LEETCODEISHIRING",3).equals("LCIRETOESIIGEDHN"));
+
+    }
+
+
+    public static String convert(String s, int numRows) {
+        if(s == null || "".equals(s) || numRows < 2){
+            return s;
+        }
+
+        String[] strs= s.split("");
+        String targets = "";
+
+        if(numRows == 2){
+            for(int i = 0; i < (strs.length % 2  == 0 ? strs.length / 2 : (strs.length /2 +1)); i++){
+                targets += strs[2 * i];
+            }
+            for(int i = 0; i < strs.length / 2; i++){
+                targets += strs[2 * i+1];
+            }
+            return targets;
+        }
+
+        int rowSize = strs.length / (numRows + numRows - 2) * (numRows-1);
+        int remainderSize = strs.length % (numRows + numRows - 2);
+        if(remainderSize <=numRows && remainderSize > 0){
+            rowSize++;
+        }else if(remainderSize > numRows && remainderSize < numRows + numRows -2){
+            rowSize += 2;
+        }
+
+        String[][] temps = new String[rowSize][numRows];
+        int z = 0;
+        for(int i = 0; i < rowSize; i++){
+            for(int j = 0; j < numRows; j++){
+                if(i % (numRows-1) ==0){
+                    if(z > strs.length -1){
+                        break;
+                    }
+                    temps[i][j] = strs[z++];
+                }else{
+                    if(j == numRows -(i % (numRows-1))-1){
+                        if(z > strs.length -1){
+                            break;
+                        }
+                        temps[i][j] = strs[z++];
+                    }
+                }
+            }
+        }
+
+        for(int j = 0; j < numRows; j++){
+            for(int i = 0; i < rowSize; i++){
+                if(temps[i][j] != null){
+                    targets += temps[i][j];
+                }
+            }
+        }
+
+        return targets;
     }
 }
