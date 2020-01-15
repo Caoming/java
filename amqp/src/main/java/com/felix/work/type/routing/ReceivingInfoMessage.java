@@ -4,6 +4,8 @@ import com.felix.connection.RabbitCollectionUtils;
 import com.rabbitmq.client.*;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeoutException;
 
 /**
@@ -16,8 +18,10 @@ public class ReceivingInfoMessage {
         Connection collection = RabbitCollectionUtils.getCollection();
         final Channel channel = collection.createChannel();
 
-        String queue = channel.queueDeclare().getQueue();
-        channel.queueBind(queue,RabbitCollectionUtils.FELIX_ROUTING_DEMO,"info");
+        Map<String, Object> arg = new HashMap<>();
+        arg.put("x-max-priority",10);
+
+        channel.queueBind("caoming01",RabbitCollectionUtils.FELIX_ROUTING_DEMO,"info");
 
         channel.basicQos(1);
         Consumer consumer = new DefaultConsumer(channel){
@@ -26,13 +30,20 @@ public class ReceivingInfoMessage {
                                        AMQP.BasicProperties properties,
                                        byte[] body) throws IOException {
                 long deliveryTag = envelope.getDeliveryTag();
-                System.out.println("接收到消息为：" + new String(body) + "deliveryTag为：" + deliveryTag);
+                System.out.println("接收到消息为：" + new String(body) + "deliveryTag为：" + deliveryTag);{
+
+                }
+                try{
+                    Thread.sleep(200l);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
 
             }
         };
 
 
-        channel.basicConsume(queue,true, consumer);
+        channel.basicConsume("caoming01",true, consumer);
     }
 
 }

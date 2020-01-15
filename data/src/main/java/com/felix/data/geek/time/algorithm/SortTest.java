@@ -3,7 +3,11 @@ package com.felix.data.geek.time.algorithm;
 import org.junit.Test;
 
 /**
- * 如何在 O(n) 的时间复杂度内查找一个无序数组中的第 K 大元素？
+ * 1、如何在 O(n) 的时间复杂度内查找一个无序数组中的第 K 大元素？
+ * 2、现在你有 10 个接口访问日志文件，每个日志文件大小约 300MB，
+ * 每个文件里的日志都是按照时间戳从小到大排序的。你希望将这 10 个较小的日志文件，
+ * 合并为 1 个日志文件，合并之后的日志仍然按照时间戳从小到大排列。
+ * 如果处理上述排序任务的机器内存只有 1GB，你有什么好的解决思路，能“快速”地将这 10 个日志文件合并吗？
  */
 public class SortTest {
 
@@ -49,12 +53,5 @@ public class SortTest {
         }
         quickSort(arr,k);
     }
-
-
-    private static int partition(int[] arr, Integer k) {
-
-        return k;
-    }
-
 
 }

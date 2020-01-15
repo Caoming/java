@@ -1,5 +1,7 @@
 package com.felix.data.geek.time.array;
 
+import org.junit.Test;
+
 import java.util.Arrays;
 
 /**
@@ -133,4 +135,5 @@ public class ArrayTest {
 
         return false;
     }
+
 }

@@ -23,6 +23,54 @@ public class LinkedListTest {
         System.out.println(singleLinkedList.size());
     }
 
+
+    @Test
+    public void testMerge(){
+        SingleLinkedList<Integer> A = new SingleLinkedList<>();
+        A.add(1);
+        A.add(3);
+        A.add(5);
+        A.add(7);
+
+        SingleLinkedList<Integer> B = new SingleLinkedList<>();
+        B.add(2);
+        B.add(4);
+        B.add(6);
+        B.add(8);
+
+        SingleLinkedList<Integer> C = new SingleLinkedList<>();
+        while (A.first != null && B.first != null){
+            if(A.first.getItem() > B.first.getItem()){
+                SingleLinkedList.Node<Integer> S = B.first.getNext();
+                B.first.setNext(C.first);
+                C.first = B.first;
+                B.first = S;
+            }else {
+                SingleLinkedList.Node<Integer> S = A.first.getNext();
+                A.first.setNext(C.first);
+                C.first = A.first;
+                A.first = S;
+            }
+        }
+
+        while(A.first != null){
+            SingleLinkedList.Node<Integer> S = A.first.getNext();
+            A.first.setNext(C.first);
+            C.first = A.first;
+            A.first = S;
+        }
+
+        while(B.first != null){
+            SingleLinkedList.Node<Integer> S = B.first.getNext();
+            B.first.setNext(C.first);
+            C.first = B.first;
+            B.first = S;
+        }
+        for(int i = 0; i < C.modCount; i++){
+            System.out.println();
+        }
+    }
+
     @Test
     public void testDoubleLinkList(){
         DoubleLinkedList<Integer> doubleLinkedList = new DoubleLinkedList<>();

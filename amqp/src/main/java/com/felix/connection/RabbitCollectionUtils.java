@@ -22,11 +22,11 @@ public class RabbitCollectionUtils {
     public static Connection getCollection()  {
         ConnectionFactory connectionFactory = new ConnectionFactory();
         connectionFactory.setConnectionTimeout(10000);
-        connectionFactory.setPassword("wintel");
-        connectionFactory.setUsername("wintel");
+        connectionFactory.setPassword("guest");
+        connectionFactory.setUsername("guest");
         connectionFactory.setVirtualHost("/");
         try {
-            return connectionFactory.newConnection(Address.parseAddresses("106.75.120.153:5672"));
+            return connectionFactory.newConnection(Address.parseAddresses("127.0.0.1:5672"));
         } catch (IOException e) {
             e.printStackTrace();
         } catch (TimeoutException e) {

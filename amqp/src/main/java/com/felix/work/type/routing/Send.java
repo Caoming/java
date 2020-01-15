@@ -1,12 +1,11 @@
 package com.felix.work.type.routing;
 
 import com.felix.connection.RabbitCollectionUtils;
-import com.rabbitmq.client.Channel;
-import com.rabbitmq.client.ConfirmListener;
-import com.rabbitmq.client.Connection;
-import com.rabbitmq.client.MessageProperties;
+import com.rabbitmq.client.*;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeoutException;
 
 /**
@@ -19,9 +18,13 @@ public class Send {
         Connection collection = RabbitCollectionUtils.getCollection();
         Channel channel = collection.createChannel();
 
-        channel.exchangeDeclare(RabbitCollectionUtils.FELIX_ROUTING_DEMO,"direct",true);
+        Map<String, Object> arg = new HashMap<>();
+        arg.put("x-max-priority",10);
+        channel.exchangeDeclare(RabbitCollectionUtils.FELIX_ROUTING_DEMO,"direct",
+                true);
+        channel.queueDeclare("caoming01",true,false,false,arg);
+        channel.queueBind("caoming01", RabbitCollectionUtils.FELIX_ROUTING_DEMO, "info");
 
-        channel.confirmSelect();
         channel.addConfirmListener(new ConfirmListener() {
             public void handleAck(long deliveryTag, boolean multiple) throws IOException {
                 System.out.println("消息发送成功了");
@@ -33,9 +36,15 @@ public class Send {
         });
 
         for(int i = 0; i < 100; i++) {
-            channel.basicPublish(RabbitCollectionUtils.FELIX_ROUTING_DEMO,"info", MessageProperties.PERSISTENT_TEXT_PLAIN,("info message"+i).getBytes());
-            channel.basicPublish(RabbitCollectionUtils.FELIX_ROUTING_DEMO,"warning", MessageProperties.PERSISTENT_TEXT_PLAIN,("warning message"+i).getBytes());
-            channel.basicPublish(RabbitCollectionUtils.FELIX_ROUTING_DEMO,"warning", MessageProperties.PERSISTENT_TEXT_PLAIN,("error message"+i).getBytes());
+            AMQP.BasicProperties.Builder builder = new AMQP.BasicProperties.Builder();
+            if(i%2 ==0) {
+                builder.priority(10);
+                channel.basicPublish(RabbitCollectionUtils.FELIX_ROUTING_DEMO, "info", builder.build(), ("info message" + i).getBytes());
+            }else {
+                builder.priority(0);
+                channel.basicPublish(RabbitCollectionUtils.FELIX_ROUTING_DEMO, "info", builder.build(), ("info message" + i).getBytes());
+            }
+//            channel.basicPublish(RabbitCollectionUtils.FELIX_ROUTING_DEMO,"warning", MessageProperties.PERSISTENT_TEXT_PLAIN,("error message"+i).getBytes());
             System.out.println("消息发送成功！");
         }
 

@@ -51,6 +51,19 @@ public class Sort {
 
     }
 
+    public static void insertionSort1(int[] arr){
+        int temp,j;
+        for(int i = 0; i < arr.length;i++){
+            temp = arr[i];
+            j = i;
+            while (j >0 && temp < arr[j-1]){
+                arr[j] = arr[j-1];
+                j--;
+            }
+            arr[j] = temp;
+        }
+    }
+
     /**
      * 选择排序
      * @param arr
@@ -82,7 +95,7 @@ public class Sort {
         System.out.println(ArrayUtils.toString(arr));
 
         int[] arr1 = {7, 7, 3, 2, 1, 5, 7, 8, 3, 2, 23, 2, 2342, 34, 2};
-        insertionSort(arr1);
+        insertionSort1(arr1);
         System.out.println(ArrayUtils.toString(arr1));
 
         int[] arr2 = {7, 7, 3, 2, 1, 5, 7, 8, 3, 2, 23, 2, 2342, 34, 2};

@@ -34,7 +34,7 @@ public class Send {
 
         for(int i = 0; i < 100; i++) {
             channel.basicPublish(RabbitCollectionUtils.FELIX_PUBLISH_SUBSCRIBE_DEMO,"", MessageProperties.PERSISTENT_TEXT_PLAIN,("hello world"+i).getBytes());
-            System.out.println("消息发送成功！");
+            System.out.println("消息发送成功！"+i);
         }
 
         channel.close();
