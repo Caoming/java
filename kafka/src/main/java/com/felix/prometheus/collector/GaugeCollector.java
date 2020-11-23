@@ -15,7 +15,7 @@ import java.util.List;
  * @Date: 2020/7/9 15:20
  */
 @Component
-public class TestCollector extends Collector {
+public class GaugeCollector extends Collector {
     @Override
     public List<MetricFamilySamples> collect() {
         List<MetricFamilySamples> list = new ArrayList<>();
@@ -33,6 +33,6 @@ public class TestCollector extends Collector {
 
     public static void main(String[] args) throws IOException {
         HTTPServer server = new HTTPServer(8686);
-        new TestCollector().register();
+        new GaugeCollector().register();
     }
 }

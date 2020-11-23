@@ -11,16 +11,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/kafka")
 public class TestController {
 
-    @Autowired
-    private Producer producer;
-
-    @GetMapping(value = "/send")
-    public String send() throws Exception{
-        TestVo testVo = new TestVo();
-        testVo.setAge(12);
-        testVo.setCity("shanghai");
-        testVo.setUsername("caoming");
-        producer.send(testVo);
-        return "{\"code\":0}";
-    }
+//    @Autowired
+//    private Producer producer;
+//
+//    @GetMapping(value = "/send")
+//    public String send() throws Exception{
+//        TestVo testVo = new TestVo();
+//        testVo.setAge(12);
+//        testVo.setCity("shanghai");
+//        testVo.setUsername("caoming");
+//        producer.send(testVo);
+//        return "{\"code\":0}";
+//    }
 }

@@ -49,6 +49,7 @@ public class GuavaTest {
     @Test
     public void testLoad() throws Exception{
         LoadingCache<Object, Object> cache = CacheBuilder.newBuilder().maximumSize(200).
+                refreshAfterWrite(10L,TimeUnit.MINUTES).
                 expireAfterAccess(3, TimeUnit.MINUTES).
                 build(new CacheLoader<Object,Object>() {
             @Override
@@ -57,6 +58,9 @@ public class GuavaTest {
                 return new Obj(1000,1000);
             }
         });
+
+
+
         Obj obj_a = new Obj(1, 2);
         Obj obj_b = new Obj(2, 2);
         Obj obj_c = new Obj(3, 2);

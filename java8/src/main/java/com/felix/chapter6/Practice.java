@@ -29,15 +29,15 @@ public class Practice {
         // 分组
         Map<Dish.Type, List<Dish>> collect = menu.stream().collect(Collectors.groupingBy(Dish::getType));
 
-        // 多级分组
-        Map<Dish.Type, Map<String, List<Dish>>> map = menu.stream().collect(
-                Collectors.groupingBy(Dish::getType, Collectors.groupingBy(dish -> {
-            if (dish.getCalories() < 3) {
-                return "normal";
-            } else {
-                return "FAT";
-            }
-        })));
+//        // 多级分组
+//        Map<Dish.Type, Map<String, List<Dish>>> map = menu.stream().collect(
+//                Collectors.groupingBy(Dish::getType, Collectors.groupingBy(dish -> {
+//            if (dish.getCalories() < 3) {
+//                return "normal";
+//            } else {
+//                return "FAT";
+//            }
+//        })));
 
         // 多级分组
         Map<Dish.Type, Long> typeLongMap = menu.stream().

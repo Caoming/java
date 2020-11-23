@@ -17,9 +17,9 @@ import java.io.*;
 import java.net.URL;
 import java.util.stream.Stream;
 
-@Component
+//@Component
 public class Producer {
-    @Autowired
+//    @Autowired
     private KafkaTemplate kafkaTemplate;
 
     private static final Logger logger = LoggerFactory.getLogger(Producer.class);

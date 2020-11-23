@@ -5,7 +5,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.*;
 
+import io.prometheus.client.CollectorRegistry;
+import io.prometheus.client.exporter.PushGateway;
 import org.springframework.stereotype.Component;
 
 import io.prometheus.client.Collector;
@@ -20,7 +23,7 @@ public class PushgatewayCollector extends Collector {
     @Override
     public List<MetricFamilySamples> collect() {
         List<MetricFamilySamples> list = new ArrayList<>();
-        String metricName = "radar";
+        String metricName = "tuanyou1231";
         MetricFamilySamples.Sample sample = new MetricFamilySamples.Sample(metricName,
                 Arrays.asList("newlink"), Arrays.asList("caoming"), 666);
         MetricFamilySamples.Sample sample2 = new MetricFamilySamples.Sample(metricName,Arrays.asList("yeji1","yeji2"),
@@ -32,8 +35,12 @@ public class PushgatewayCollector extends Collector {
         return list;
     }
 
-    public static void main(String[] args) throws IOException {
-        HTTPServer server = new HTTPServer(8686);
-        new PushgatewayCollector().register();
+    public static void main(String[] args) throws Exception {
+        CollectorRegistry registry = CollectorRegistry.defaultRegistry;
+        PushGateway pushGateway = new PushGateway("127.0.0.1:9091");
+        while(true){
+            pushGateway.push(new PushgatewayCollector(),"hello world");
+            Thread.sleep(2000L);
+        }
     }
 }

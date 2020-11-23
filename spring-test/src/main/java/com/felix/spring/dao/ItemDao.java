@@ -6,18 +6,17 @@ import lombok.extern.slf4j.Slf4j;
  * @Author caoming
  * @Date: 2020/10/13 19:13
  */
-@Slf4j
 public class ItemDao {
 
     public void add(){
-        System.out.println("add...account");
+        System.out.println("add...item");
     }
 
     public void update(){
-        System.out.println("update...account");
+        System.out.println("update...item");
     }
 
     public void delete(){
-        System.out.println("delete...account");
+        System.out.println("delete...item");
     }
 }
